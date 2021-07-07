@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "AdBlock — best ad blocker",
+  "version": "4.34.0",
+  "description": "Block ads and pop-ups on YouTube, Facebook, Twitch, and your favorite websites.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["https://www.random.org/widgets/integers/iframe*"],
+      "run_at": "document_end",
+      "js": ["injected.js", "moment.min.js"]
+    },
+    {
+      "all_frames": true,
+      "matches": ["https://www.random.org/lists/"],
+      "run_at": "document_start",
+      "js": ["injectedLists.js"]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "https://www.random.org/widgets/integers/iframe*",
+    "storage"
+  ]
+}
